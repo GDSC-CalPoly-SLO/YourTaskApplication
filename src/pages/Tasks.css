@@ -1,0 +1,45 @@
+#top-bar {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  padding: 0.5em 1em;
+  box-shadow: 0 1px 4px hsl(360, 0%, 75%);
+  font-family: "Open Sans", sans-serif;
+}
+
+#top-bar-content {
+  display: flex;
+  gap: 0.75em;
+}
+
+.icon {
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+}
+
+#user-icon {
+  border-radius: 50%;
+}
+
+.search-bar {
+  background-color: #F1F3F4;
+  width: 40vw;
+  max-width: 480px;
+  padding: 0.5em 1.5em;
+  border: none;
+  border-radius: 0.5em;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+.search-bar::placeholder {
+  color: #B1B1B2;
+  font-weight: 500;
+}
+
+h2 {
+  color: #373739;
+}

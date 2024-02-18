@@ -1,9 +1,10 @@
 import { useState } from "react";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  updateProfile
 } from "firebase/auth";
-import { auth } from "../firebaseInit.js";
+import { auth, db } from "../firebaseInit.js";
 import "./Login.css";
 
 export default function Login({ setLoggedIn }) {
@@ -16,6 +17,9 @@ export default function Login({ setLoggedIn }) {
     if (signUp) {
       try {
         await createUserWithEmailAndPassword(auth, email, pass);
+        await updateProfile(auth.currentUser, {
+          displayName: e.target.name.value
+        });
         setLoggedIn(true);
       } catch (error) {
         error.code == "auth/email-already-in-use"
@@ -27,9 +31,6 @@ export default function Login({ setLoggedIn }) {
         await signInWithEmailAndPassword(auth, email, pass);
         setLoggedIn(true);
       } catch (error) {
-        /* error.code == "auth/invalid-credential"
-          ? alert("Account not found.")
-          : alert("Login failed."); */
         alert("Login failed.");
       }
     }

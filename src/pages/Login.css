@@ -38,11 +38,12 @@
 }
 
 .input {
+  background-color: #F1F3F4;
   padding: 0.5em;
+  border: none;
+  border-radius: 0.5em;
   font-family: inherit;
   font-size: 1em;
-  border: 1px solid hsl(360, 0%, 50%);
-  border-radius: 0.5em;
 }
 
 #submit {
