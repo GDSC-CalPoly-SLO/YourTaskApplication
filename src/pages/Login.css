@@ -65,12 +65,12 @@
   transition: background-color 500ms;
 }
 
-span {
+#sign-up {
   color: #2563EB;
   cursor: pointer;
 }
 
-span:hover {
+#sign-up:hover {
   text-decoration: underline;
   color: #4285f4;
   transition: color 500ms;

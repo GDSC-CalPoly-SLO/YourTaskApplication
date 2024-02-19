@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import './App.css';
 import Login from './pages/Login';
-import Tasks from './pages/Tasks';
+import Home from './pages/Home';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <div className="App">
-      {loggedIn ? <Tasks /> : <Login setLoggedIn={setLoggedIn} />}
+      {loggedIn ? <Home /> : <Login setLoggedIn={setLoggedIn} />}
     </div>
   );
 }

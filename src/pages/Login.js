@@ -84,7 +84,7 @@ export default function Login({ setLoggedIn }) {
           ></input>
         </form>
         <p>{signUp ? "Already" : "Don't"} have an account?{" "}
-          <span onClick={toggleSignUp}>{signUp ? "Login" : "Sign up"}</span>
+          <span id="sign-up" onClick={toggleSignUp}>{signUp ? "Login" : "Sign up"}</span>
         </p>
       </div>
     </div>
