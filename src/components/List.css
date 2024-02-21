@@ -20,13 +20,10 @@
 }
 
 #add-task-button:hover {
-  color: #4285f4;
+  color: #4285F4;
 }
 
-.fa-plus {
+#add-task-button>span {
   color: #2563EB;
-}
-
-p>span {
-  padding-right: 0.75em;
+  margin-right: 0.75em;
 }

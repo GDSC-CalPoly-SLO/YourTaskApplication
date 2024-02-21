@@ -14,10 +14,10 @@ export default function Tasks() {
     readLists();
   }, [])
 
-  async function readLists() {
+  const readLists = async () => {
     let userLists = []
-    const querySnapshot = await getDocs(collection(userData, "lists"));
-    querySnapshot.forEach((doc) => {
+    const query = await getDocs(collection(userData, "lists"));
+    query.forEach((doc) => {
       userLists = [...userLists, doc.data()];
     });
     setLists(userLists);

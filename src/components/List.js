@@ -12,12 +12,12 @@ export default function List({ list }) {
 
   useEffect(() => {
     readTasks();
-  }, [])
+  }, []);
 
-  async function readTasks() {
+  const readTasks = async () => {
     let listTasks = [];
-    const querySnapshot = await getDocs(collection(listData, "tasks"));
-    querySnapshot.forEach((doc) => {
+    const query = await getDocs(collection(listData, "tasks"));
+    query.forEach((doc) => {
       listTasks = [...listTasks, doc.data()];
     })
     setTasks(listTasks);
