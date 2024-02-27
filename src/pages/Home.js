@@ -7,8 +7,9 @@ import "./Home.css";
 
 export default function Tasks() {
 
+  const userPath = doc(db, `users/${auth.currentUser.uid}`);
+
   const [lists, setLists] = useState([]);
-  const userData = doc(db, `users/${auth.currentUser.uid}`);
 
   useEffect(() => {
     readLists();
@@ -16,9 +17,9 @@ export default function Tasks() {
 
   const readLists = async () => {
     let userLists = []
-    const query = await getDocs(collection(userData, "lists"));
+    const query = await getDocs(collection(userPath, "lists"));
     query.forEach((doc) => {
-      userLists = [...userLists, doc.data()];
+      userLists = [...userLists, doc];
     });
     setLists(userLists);
   }
@@ -44,7 +45,11 @@ export default function Tasks() {
       </header>
       <section id="board">
         {lists.map((list) => (
-          <List key={list.name} list={list} />
+          <List
+            key={list.data().name}
+            data={list.data()}
+            listRef={list.ref}
+          />
         ))}
         {lists.length === 0 &&
           <div>

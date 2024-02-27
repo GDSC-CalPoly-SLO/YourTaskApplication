@@ -16,6 +16,11 @@
 }
 
 #add-task-button {
+  width: fit-content;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 1em;
   cursor: pointer;
 }
 

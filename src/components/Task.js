@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
+import { updateDoc } from "firebase/firestore";
 import "./Task.css";
 
-export default function Task({ task }) {
+export default function Task({ data, taskRef, deleteTask }) {
 
   const [editMode, setEditMode] = useState(false);
   const [editStyle, setEditStyle] = useState({});
-
-  const [completed, setCompleted] = useState(task.completed);
+  const [completed, setCompleted] = useState(data.completed);
   const [checked, setChecked] = useState("");
   const [striked, setStriked] = useState({});
-  const [taskName, setTaskName] = useState(task.name);
-  const [taskDetails, setTaskDetails] = useState(task.details);
-  // const [taskDate, setTaskDate] = useState("Date");
+  const [taskName, setTaskName] = useState(data.name);
+  const [taskDetails, setTaskDetails] = useState(data.details);
+  // const [taskDate, setTaskDate] = useState(data.date);
 
   useEffect(() => {
-    /* completed ? setChecked("fa-solid fa-square-check")
-      : setChecked("fa-regular fa-square"); */
     if (completed) {
       setChecked("fa-solid fa-square-check");
       setStriked({
@@ -27,6 +25,22 @@ export default function Task({ task }) {
       setStriked({});
     }
   }, []);
+
+  const toggleCompleted = () => {
+    if (completed) {
+      setChecked("fa-regular fa-square");
+      setStriked({});
+      updateDoc(taskRef, { completed: false });
+    } else {
+      setChecked("fa-solid fa-square-check");
+      setStriked({
+        textDecoration: "line-through",
+        color: "#686c71"
+      });
+      updateDoc(taskRef, { completed: true });
+    }
+    setCompleted(!completed);
+  }
 
   const enterEditMode = () => {
     setEditStyle({
@@ -40,21 +54,10 @@ export default function Task({ task }) {
     setEditStyle({});
     setEditMode(false);
     // write to database
-  }
-
-  const toggleCompleted = () => {
-    if (completed) {
-      setChecked("fa-regular fa-square");
-      setStriked({});
-    } else {
-      setChecked("fa-solid fa-square-check");
-      setStriked({
-        textDecoration: "line-through",
-        color: "#686c71"
-      });
-    }
-    setCompleted(!completed)
-    // write to database
+    updateDoc(taskRef, {
+      name: taskName,
+      details: taskDetails
+    });
   }
 
   return (
@@ -66,7 +69,7 @@ export default function Task({ task }) {
         ><span className={checked}></span></button>
         {editMode
           ? <form className="task-info fill">
-            <input
+            <input autoFocus
               type="text"
               className="main-input"
               value={taskName}
@@ -81,7 +84,7 @@ export default function Task({ task }) {
               onChange={(e) => { setTaskDetails(e.target.value); }}
             />
             {/* <input
-              type="text"
+              type="date"
               className="sub-input"
               value={taskDate}
               onChange={(e) => { setTaskDate(e.target.value); }}
@@ -108,7 +111,13 @@ export default function Task({ task }) {
             onClick={enterEditMode}
           ><span className="fa-solid fa-pen"></span></button>
         )}
-        <button id="delete"><span className="fa-solid fa-trash"></span></button>
+        <button
+          id="delete"
+          onClick={/* deleteTask.bind(null, taskRef) */
+            () => { deleteTask(taskRef) }
+            /* test to make sure the above actually works */
+          }
+        ><span className="fa-solid fa-trash"></span></button>
       </div>
     </div>
   )

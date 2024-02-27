@@ -47,7 +47,7 @@
 }
 
 .main-input {
-  background: inherit;
+  background: none;
   font-family: inherit;
   font-size: 1em;
   border: none;
