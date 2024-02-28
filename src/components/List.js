@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addDoc, collection, deleteDoc, getDoc, getDocs } from "firebase/firestore";
+import { Timestamp, addDoc, collection, deleteDoc, getDoc, getDocs } from "firebase/firestore";
 import Task from "./Task.js";
 import "./List.css";
 
@@ -16,6 +16,8 @@ export default function List({ data, listRef }) {
     const query = await getDocs(collection(listRef, "tasks"));
     query.forEach((doc) => {
       listTasks = [...listTasks, doc];
+      console.log(doc.data());
+      console.log(doc.data().date);
     })
     setTasks(listTasks);
   }
@@ -23,7 +25,7 @@ export default function List({ data, listRef }) {
   const addTask = async () => {
     const newTask = await addDoc(collection(listRef, "tasks"), {
       completed: false,
-      date: "",
+      date: Timestamp.now(),
       details: "",
       name: "New task"
     });

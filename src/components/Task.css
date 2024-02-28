@@ -62,3 +62,13 @@
   border: none;
   outline: none;
 }
+
+.date {
+  background: white;
+  border-radius: 0.85em;
+  border: 1px solid #B1B1B2;
+  color: #2563EB;
+  width: fit-content;
+  padding: 0.25em 0.5em;
+  font-weight: 500;
+}

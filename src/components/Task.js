@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { updateDoc } from "firebase/firestore";
+import { Timestamp, updateDoc } from "firebase/firestore";
 import "./Task.css";
 
 export default function Task({ data, taskRef, deleteTask }) {
@@ -11,9 +11,10 @@ export default function Task({ data, taskRef, deleteTask }) {
   const [striked, setStriked] = useState({});
   const [taskName, setTaskName] = useState(data.name);
   const [taskDetails, setTaskDetails] = useState(data.details);
-  // const [taskDate, setTaskDate] = useState(data.date);
+  const [taskDate, setTaskDate] = useState("");
 
   useEffect(() => {
+    setTaskDate(getDateUSA(data.date.toDate().toISOString().slice(0, 10)));
     if (completed) {
       setChecked("fa-solid fa-square-check");
       setStriked({
@@ -43,6 +44,7 @@ export default function Task({ data, taskRef, deleteTask }) {
   }
 
   const enterEditMode = () => {
+    setTaskDate(getDateISO(taskDate));
     setEditStyle({
       backgroundColor: "#F6F8F9",
       boxShadow: "0 1px 4px hsl(0, 0%, 75%)"
@@ -53,11 +55,26 @@ export default function Task({ data, taskRef, deleteTask }) {
   const exitEditMode = () => {
     setEditStyle({});
     setEditMode(false);
-    // write to database
+    const date = Timestamp.fromDate(new Date(taskDate));
+    // Write changes to the database
     updateDoc(taskRef, {
       name: taskName,
-      details: taskDetails
+      details: taskDetails,
+      date: Timestamp.fromDate(new Date(taskDate))
     });
+    // Set the display date back to USA format after updating
+    setTaskDate(getDateUSA(taskDate));
+  }
+
+  const getDateISO = (dateUSA) => {
+    console.log(dateUSA);
+    let date = `${dateUSA.slice(6, 11)}-${dateUSA.slice(0, 2)}-${dateUSA.slice(3, 5)}`;
+    console.log(date);
+    return date;
+  }
+
+  const getDateUSA = (dateISO) => {
+    return `${dateISO.slice(5, 7)}/${dateISO.slice(8, 10)}/${dateISO.slice(0, 4)}`;
   }
 
   return (
@@ -83,19 +100,22 @@ export default function Task({ data, taskRef, deleteTask }) {
               placeholder="Details"
               onChange={(e) => { setTaskDetails(e.target.value); }}
             />
-            {/* <input
+            <input
+              id="date"
               type="date"
-              className="sub-input"
+              className="sub-input date"
               value={taskDate}
               onChange={(e) => { setTaskDate(e.target.value); }}
-            /> */}
+            />
             <p className="sub-text">Click to change values</p>
           </form>
           : <div className="task-info fill">
             <p className="main-text" style={striked}>{taskName}</p>
             {completed ||
-              <p className="sub-text">{taskDetails}</p>
-              /* <p className="sub-text">{taskDate}</p> */
+              <>
+                <p className="sub-text">{taskDetails}</p>
+                <p className="sub-text date">{taskDate}</p>
+              </>
             }
           </div>
         }
@@ -113,10 +133,7 @@ export default function Task({ data, taskRef, deleteTask }) {
         )}
         <button
           id="delete"
-          onClick={/* deleteTask.bind(null, taskRef) */
-            () => { deleteTask(taskRef) }
-            /* test to make sure the above actually works */
-          }
+          onClick={() => { deleteTask(taskRef) }}
         ><span className="fa-solid fa-trash"></span></button>
       </div>
     </div>

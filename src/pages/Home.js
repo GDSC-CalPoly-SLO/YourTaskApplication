@@ -29,7 +29,7 @@ export default function Tasks() {
       <header id="top-bar">
         <div id="top-bar-content">
           <img className="icon" src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Google_Tasks_2021.svg" alt="tasksIcon" />
-          <h2>Tasks</h2>
+          <h2>Checklists</h2>
         </div>
         <input
           id="search"
