@@ -83,7 +83,7 @@ export default function Task({ data, taskRef, deleteTask }) {
         <button
           id="complete"
           onClick={toggleCompleted}
-        ><span className={checked}></span></button>
+        ><span className={checked} /></button>
         {editMode
           ? <form className="task-info fill">
             <input autoFocus
@@ -125,16 +125,16 @@ export default function Task({ data, taskRef, deleteTask }) {
           ? <button
             id="save"
             onClick={exitEditMode}
-          ><span className="fa-solid fa-floppy-disk"></span></button>
+          ><span className="fa-solid fa-floppy-disk" /></button>
           : <button
             id="edit"
             onClick={enterEditMode}
-          ><span className="fa-solid fa-pen"></span></button>
+          ><span className="fa-solid fa-pen" /></button>
         )}
         <button
           id="delete"
           onClick={() => { deleteTask(taskRef) }}
-        ><span className="fa-solid fa-trash"></span></button>
+        ><span className="fa-solid fa-trash" /></button>
       </div>
     </div>
   )

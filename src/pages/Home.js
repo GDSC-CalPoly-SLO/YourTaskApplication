@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { collection, doc, getDocs } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from 'firebase/firestore';
 import { auth, db } from '../firebaseInit.js';
 import List from '../components/List.js';
 import "./Home.css";
@@ -22,6 +22,18 @@ export default function Tasks() {
       userLists = [...userLists, doc];
     });
     setLists(userLists);
+  }
+
+  const addList = async () => {
+    const newList = await addDoc(collection(userPath, "lists"), {
+      name: "New List"
+    });
+    setLists([...lists, await getDoc(newList)]);
+  }
+
+  const deleteList = async (listRef) => {
+    setLists(lists.filter(list => list.ref.id !== listRef.id));
+    await deleteDoc(listRef);
   }
 
   return (
@@ -49,6 +61,7 @@ export default function Tasks() {
             key={list.data().name}
             data={list.data()}
             listRef={list.ref}
+            deleteList={deleteList}
           />
         ))}
         {lists.length === 0 &&
@@ -59,6 +72,7 @@ export default function Tasks() {
         }
         <button
           id="add-list-button"
+          onClick={addList}
         >+ Add new list</button>
       </section>
     </>

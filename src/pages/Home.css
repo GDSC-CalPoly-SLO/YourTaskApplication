@@ -50,6 +50,10 @@ h3 {
   font-weight: 600;
 }
 
+h3 {
+  color: black;
+}
+
 #board {
   display: flex;
   flex-direction: column;
