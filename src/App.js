@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      {loggedIn ? <Home /> : <Login setLoggedIn={setLoggedIn} />}
+      {loggedIn ? <Home setLoggedIn={setLoggedIn} /> : <Login setLoggedIn={setLoggedIn} />}
     </div>
   );
 }

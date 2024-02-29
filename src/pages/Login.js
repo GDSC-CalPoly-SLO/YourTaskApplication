@@ -5,6 +5,7 @@ import {
   updateProfile
 } from "firebase/auth";
 import { auth, db } from "../firebaseInit.js";
+import { doc, setDoc } from "firebase/firestore";
 import "./Login.css";
 
 export default function Login({ setLoggedIn }) {
@@ -22,10 +23,12 @@ export default function Login({ setLoggedIn }) {
         });
         setLoggedIn(true);
       } catch (error) {
-        error.code == "auth/email-already-in-use"
+        error.code === "auth/email-already-in-use"
           ? alert("Email is already in use.")
           : alert("Sign up failed.");
       }
+      // Create a document for the user
+      await setDoc(doc(db, "users", auth.currentUser.uid), {});
     } else {
       try {
         await signInWithEmailAndPassword(auth, email, pass);
@@ -80,12 +83,10 @@ export default function Login({ setLoggedIn }) {
           <input
             id="submit"
             type="submit"
-            value={signUp ? "Sign Up" : "Log In"}
-          ></input>
+            value={signUp ? "Sign Up" : "Sign In"}
+          />
         </form>
-        <p>{signUp ? "Already" : "Don't"} have an account?{" "}
-          <span id="sign-up" onClick={toggleSignUp}>{signUp ? "Login" : "Sign up"}</span>
-        </p>
+        <p>{signUp ? "Already" : "Don't"} have an account? <a id="sign-up" onClick={toggleSignUp}>Sign {signUp ? "in" : "up"}</a></p>
       </div>
     </div>
   );
