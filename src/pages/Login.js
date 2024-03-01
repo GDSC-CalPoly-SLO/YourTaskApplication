@@ -46,7 +46,8 @@ export default function Login({ setLoggedIn }) {
   return (
     <div className="wrapper">
       <div className="container">
-        <h1>Tasks</h1>
+        <h1>Checklists</h1>
+        <img id="checklistsIcon" src="https://cdn-icons-png.flaticon.com/512/2644/2644923.png" />
         <form id="login-form" onSubmit={handleLogin}>
           {signUp &&
             <div className="input-wrapper">

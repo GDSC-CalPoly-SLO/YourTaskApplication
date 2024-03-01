@@ -16,7 +16,7 @@ export default function Task({ data, taskRef, deleteTask }) {
   useEffect(() => {
     setTaskDate(getDateUSA(data.date.toDate().toISOString().slice(0, 10)));
     if (completed) {
-      setChecked("fa-solid fa-square-check");
+      setChecked("fa-solid fa-square-check blue");
       setStriked({
         textDecoration: "line-through",
         color: "#686c71"
@@ -33,7 +33,7 @@ export default function Task({ data, taskRef, deleteTask }) {
       setStriked({});
       updateDoc(taskRef, { completed: false });
     } else {
-      setChecked("fa-solid fa-square-check");
+      setChecked("fa-solid fa-square-check blue");
       setStriked({
         textDecoration: "line-through",
         color: "#686c71"
@@ -67,9 +67,7 @@ export default function Task({ data, taskRef, deleteTask }) {
   }
 
   const getDateISO = (dateUSA) => {
-    console.log(dateUSA);
     let date = `${dateUSA.slice(6, 11)}-${dateUSA.slice(0, 2)}-${dateUSA.slice(3, 5)}`;
-    console.log(date);
     return date;
   }
 
@@ -85,7 +83,7 @@ export default function Task({ data, taskRef, deleteTask }) {
           onClick={toggleCompleted}
         ><span className={checked} /></button>
         {editMode
-          ? <form className="task-info fill">
+          ? <form className="task-info fill" onSubmit={exitEditMode}>
             <input autoFocus
               type="text"
               className="main-input"
@@ -106,6 +104,10 @@ export default function Task({ data, taskRef, deleteTask }) {
               className="sub-input date"
               value={taskDate}
               onChange={(e) => { setTaskDate(e.target.value); }}
+            />
+            <input
+              type="submit"
+              style={{ display: "none" /* enables form submit on "enter" */ }}
             />
             <p className="sub-text">Click to change values</p>
           </form>
@@ -128,11 +130,13 @@ export default function Task({ data, taskRef, deleteTask }) {
           ><span className="fa-solid fa-floppy-disk" /></button>
           : <button
             id="edit"
+            className="hidden"
             onClick={enterEditMode}
           ><span className="fa-solid fa-pen" /></button>
         )}
         <button
           id="delete"
+          className="hidden"
           onClick={() => { deleteTask(taskRef) }}
         ><span className="fa-solid fa-trash" /></button>
       </div>

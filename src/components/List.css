@@ -33,11 +33,13 @@
   cursor: pointer !important;
   width: fit-content !important;
   margin: 0 !important;
+  box-shadow: none !important;
 }
 
 .list-input {
   background: none;
   color: #373739;
+  width: 100%;
   font-family: inherit;
   font-size: 1.17em;
   font-weight: 600;
@@ -52,13 +54,19 @@
   font-family: inherit;
   font-size: 1em;
   cursor: pointer;
+  transition: color 100ms;
 }
 
 #add-task-button:hover {
-  color: #4285F4;
+  color: #29B6F6;
 }
 
 #add-task-button>span {
-  color: #2563EB;
+  color: #2196F3;
   margin-right: 0.75em;
+  transition: color 100ms;
+}
+
+#add-task-button:hover>span {
+  color: #29B6F6;
 }

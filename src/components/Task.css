@@ -1,9 +1,13 @@
+.task {
+  display: flex;
+}
+
 .task:hover {
   box-shadow: 0 1px 4px hsl(0, 0%, 75%);
 }
 
-.task {
-  display: flex;
+.task:hover .hidden {
+  opacity: 1;
 }
 
 .task-section {
@@ -16,6 +20,15 @@
   flex: 1;
 }
 
+.blue {
+  color: #2196F3;
+  transition: color 100ms;
+}
+
+.blue:hover {
+  color: #29B6F6;
+}
+
 .task-section>button {
   background-color: inherit;
   color: inherit;
@@ -23,6 +36,14 @@
   padding: 0.15em;
   font-size: 1em;
   cursor: pointer;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.hidden:focus {
+  opacity: 1;
 }
 
 .task-info {
@@ -67,7 +88,7 @@
   background: white;
   border-radius: 0.85em;
   border: 1px solid #B1B1B2;
-  color: #2563EB;
+  color: #2196F3;
   width: fit-content;
   padding: 0.25em 0.5em;
   font-weight: 500;
