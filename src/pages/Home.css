@@ -1,0 +1,126 @@
+#top-bar {
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5em 1em;
+  box-shadow: 0 1px 4px hsl(0, 0%, 75%);
+  font-family: "Open Sans", sans-serif;
+}
+
+#top-bar-button {
+  all: unset;
+  display: flex;
+  gap: 0.75em;
+  cursor: pointer;
+}
+
+.icon {
+  width: 2em;
+  height: 2em;
+}
+
+#user-icon {
+  border-radius: 50%;
+}
+
+#top-bar-button:focus .icon {
+  outline: 2px solid black;
+}
+
+.search-bar {
+  background-color: #F1F3F4;
+  width: 40vw;
+  max-width: 480px;
+  padding: 0.5em 1.5em;
+  border: none;
+  border-radius: 0.5em;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+.search-bar::placeholder {
+  color: #B1B1B2;
+  font-weight: 500;
+}
+
+h2 {
+  color: #373739;
+  letter-spacing: -0.05em;
+  text-align: center;
+}
+
+h2,
+h3 {
+  font-weight: 600;
+}
+
+h3 {
+  color: black;
+}
+
+#board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 2em;
+  font-family: "Open Sans", sans-serif;
+}
+
+.home-button {
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1em;
+  font-weight: 500;
+  width: fit-content;
+  padding: 0.5em 1em;
+  margin: 1em;
+  border: none;
+  border-radius: 1em;
+}
+
+#add-list {
+  background-color: #2196F3;
+  color: white;
+  box-shadow: 0 1px 2px #2196F3;
+  transition-property: background-color, box-shadow;
+  transition-duration: 250ms;
+}
+
+#add-list:hover {
+  background-color: #29B6F6;
+  box-shadow: 0 1px 4px #29B6F6;
+}
+
+#user-info {
+  position: fixed;
+  right: 0;
+  background: white;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 4px hsl(0, 0%, 75%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5em;
+  padding: 0.75em;
+  gap: 0.5em;
+}
+
+#sign-out {
+  background-color: #DC3545;
+  color: white;
+  margin: 0;
+  box-shadow: 0 1px 2px #DC3545;
+  transition-property: background-color, box-shadow;
+  transition-duration: 250ms;
+}
+
+#sign-out:hover {
+  background-color: #E43A3A;
+  box-shadow: 0 1px 4px #E43A3A;
+}

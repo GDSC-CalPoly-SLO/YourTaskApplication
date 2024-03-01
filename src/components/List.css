@@ -1,0 +1,72 @@
+.list-container {
+  background-color: white;
+  color: #686C71;
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  max-width: 768px;
+  padding: 0.5em 0;
+  border-radius: 1em;
+  box-shadow: 0 1px 4px hsl(0, 0%, 75%);
+  text-align: left;
+}
+
+.list-container>* {
+  padding: 0.5em 1em;
+}
+
+.list-section {
+  display: flex;
+  gap: 0.5em;
+}
+
+.fill {
+  flex: 1;
+}
+
+.list-section-btn {
+  background-color: inherit !important;
+  color: inherit !important;
+  border: none !important;
+  padding: 0.15em !important;
+  font-size: 1em !important;
+  cursor: pointer !important;
+  width: fit-content !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+}
+
+.list-input {
+  background: none;
+  color: #373739;
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.17em;
+  font-weight: 600;
+  border: none;
+  outline: none;
+}
+
+#add-task-button {
+  width: fit-content;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 1em;
+  cursor: pointer;
+  transition: color 100ms;
+}
+
+#add-task-button:hover {
+  color: #29B6F6;
+}
+
+#add-task-button>span {
+  color: #2196F3;
+  margin-right: 0.75em;
+  transition: color 100ms;
+}
+
+#add-task-button:hover>span {
+  color: #29B6F6;
+}
